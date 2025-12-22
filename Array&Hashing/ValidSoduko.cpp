@@ -23,7 +23,7 @@ bool isValidSoduko(vector<vector<char>>& badBoard){
                 col[j].insert(c);
             }
 
-            int boxIndex = (i/3)*i + (j/3);
+            int boxIndex = (i/3)*3 + (j/3);
             if(box[boxIndex].count(c)){
                 return false;
             }else{

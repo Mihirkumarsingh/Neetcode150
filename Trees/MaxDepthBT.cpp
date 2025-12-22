@@ -43,7 +43,17 @@ int maxDepth(TreeNode* root){
     if(root == NULL){
         return 0;
     }
-    return max(maxDepth(root->left), maxDepth(root->right)) + 1;
+
+    // Depth of left subtree
+    int leftDepth = maxDepth(root->left);
+
+    // Depth of right subtree
+    int rightDepth = maxDepth(root->right);
+
+    // Take the maximum and add 1 for current node
+    int maxSubtreeDepth = max(leftDepth, rightDepth);
+
+    return maxSubtreeDepth + 1;
 }
 int main(){
     // Example tree: [3,9,20,-1,-1,15,7]
@@ -58,3 +68,49 @@ int main(){
     cout << "Max Depth: " << maxDepth(root) << "\n";
     return 0;
 }
+
+/*
+---------------------------------------------------------
+DRY RUN (STEP BY STEP EXECUTION)
+---------------------------------------------------------
+
+Call:
+maxDepth(3)
+
+1) maxDepth(3)
+   ├── leftDepth  = maxDepth(9)
+   └── rightDepth = maxDepth(20)
+
+2) maxDepth(9)
+   ├── leftDepth  = maxDepth(NULL) -> 0
+   └── rightDepth = maxDepth(NULL) -> 0
+   return max(0, 0) + 1 = 1
+
+3) maxDepth(20)
+   ├── leftDepth  = maxDepth(15)
+   └── rightDepth = maxDepth(7)
+
+4) maxDepth(15)
+   ├── leftDepth  = maxDepth(NULL) -> 0
+   └── rightDepth = maxDepth(NULL) -> 0
+   return max(0, 0) + 1 = 1
+
+5) maxDepth(7)
+   ├── leftDepth  = maxDepth(NULL) -> 0
+   └── rightDepth = maxDepth(NULL) -> 0
+   return max(0, 0) + 1 = 1
+
+6) Back to maxDepth(20)
+   leftDepth  = 1
+   rightDepth = 1
+   return max(1, 1) + 1 = 2
+
+7) Back to maxDepth(3)
+   leftDepth  = 1
+   rightDepth = 2
+   return max(1, 2) + 1 = 3
+
+FINAL ANSWER:
+maxDepth = 3
+---------------------------------------------------------
+*/
