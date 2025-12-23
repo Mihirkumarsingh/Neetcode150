@@ -4,31 +4,29 @@
 #include<deque>
 using namespace std;
 vector<int> helper(vector<int>& nums, int k){
-    vector<int> res;
-    deque<int> mq;
-    if(k==0){
-        return res;
-    }
     int n = nums.size();
-    for(int i = 0 ; i< n; i++){
-        int x = nums[i];
+    vector<int> output(n - k + 1);
+    deque<int> q;
+    int l = 0, r = 0;
 
-        if(i >= k){
-            int leaving = nums[i-k];
-            if(!mq.empty() && mq.front() == leaving){
-                mq.pop_front();
-            }
+    while (r < n) {
+        while (!q.empty() && nums[q.back()] < nums[r]) {
+            q.pop_back();
         }
-        while(!mq.empty() && mq.back() < x){
-            mq.pop_back();
-        }
-        mq.push_back(x);
+        q.push_back(r);
 
-        if(i >= k-1){
-            res.push_back(mq.front());
+        if (l > q.front()) {
+            q.pop_front();
         }
+
+        if ((r + 1) >= k) {
+            output[l] = nums[q.front()];
+            l++;
+        }
+        r++;
     }
-    return res;
+
+    return output;
 }
 int main(){
     vector<int> nums = {1,3,-1,-3,5,3,6,7};

@@ -97,9 +97,9 @@ int main(){
     TreeNode* root = buildTree(arr, 0);
 
     if (isBalanced(root))
-        cout << "Tree is Balanced ✅" << endl;
+        cout << "Tree is Balanced" << endl;
     else
-        cout << "Tree is NOT Balanced ❌" << endl;
+        cout << "Tree is NOT Balanced" << endl;
 
     return 0;
 }   
