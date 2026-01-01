@@ -4,8 +4,6 @@ using namespace std;
 ------------------------------------------------------------
 SUBSETS USING BACKTRACKING (INCLUDE / EXCLUDE PATTERN)
 
-nums = [1,2,3]
-
 For every element, we make TWO decisions:
 1) Include nums[index]
 2) Exclude nums[index]
@@ -18,6 +16,16 @@ Key ideas:
 - subset stores CURRENT choices
 - res stores ALL valid subsets
 ------------------------------------------------------------
+
+
+                     []
+              /                 \
+          [1]                   []
+        /      \             /       \
+     [1,2]     [1]        [2]         []
+     /   \     /   \      /   \        /   \
+[1,2,2] [1,2] [1,2] [1] [2,2] [2]    [2]   []
+
 */
 
 void createSubset(vector<int>& nums, int index, vector<vector<int>>& res, vector<int>& subset){
